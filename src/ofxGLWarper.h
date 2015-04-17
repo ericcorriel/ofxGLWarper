@@ -62,6 +62,7 @@ public:
 	ofVec4f	fromScreenToWarpCoord(float x,float y,float z);
 	ofVec4f	fromWarpToScreenCoord(float x,float y,float z);
     
+    void setCorner(CornerLocation cornerLocation); //new method to activate corners via keyboard keys 1-4
     void setCorner(CornerLocation cornerLocation, ofPoint screenLocation);
     ofPoint getCorner(CornerLocation cornerLocation);
         

@@ -373,6 +373,12 @@ void ofxGLWarper::mouseScrolled(ofMouseEventArgs &args){}
 //--------------------------------------------------------------
 void ofxGLWarper::keyPressed(ofKeyEventArgs &args){
         switch (args.key) {
+            //map 1-4 keys to respective corners; when pressed activate respective corner
+            case '1': setCorner(TOP_LEFT);  break;
+            case '2': setCorner(TOP_RIGHT); break;
+            case '3': setCorner(BOTTOM_RIGHT); break;
+            case '4': setCorner(BOTTOM_LEFT); break;
+                
                 if (whichCorner>=0 && cornerSelected) {
             case OF_KEY_DOWN:
                 corners[whichCorner].y++;
@@ -451,6 +457,14 @@ ofVec4f ofxGLWarper::fromWarpToScreenCoord(float x, float y, float z){
 	warpedPoint.z = warpedPoint.z / warpedPoint.w;
 	
 	return warpedPoint;
+}
+//--------------------------------------------------------------
+//only called from keyPress(); sets and activates a corner via 1-4 keys
+void ofxGLWarper::setCorner(CornerLocation cornerLocation){
+    CornerLocation location = cornerLocation;
+    whichCorner = location;
+    cornerSelected = true;
+    ofNotifyEvent(changeEvent, location, this);
 }
 //--------------------------------------------------------------
 void ofxGLWarper::setCorner(CornerLocation cornerLocation, ofPoint screenLocation){
